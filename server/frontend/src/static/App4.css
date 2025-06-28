@@ -1,0 +1,12 @@
+body {
+    background-color: lightblue;
+    position: fixed;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.send_password {
+    border-radius: 15%;
+    color: rgb(170, 170, 40);
+    cursor: pointer;
+}
