@@ -1,3 +1,2 @@
-/server/frontend/node_modules
-/server/.env
 /server/databases/database.db
+/server/frontend/node_modules/
