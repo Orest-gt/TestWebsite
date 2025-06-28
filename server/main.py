@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from starlette.staticfiles import StaticFiles
@@ -6,6 +6,16 @@ import sqlite3
 import base64
 from dotenv import load_dotenv
 import json
+from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.templating import Jinja2Templates
+import os
+
+templates = Jinja2Templates(directory="server/frontend/src/templates")
+
+load_dotenv()
+key = os.environ.get("KEY")
+
+# I want to make the passwords encrypted using this key
 
 def add_json_metadata(username: str, password: str, metadata: str, database: str = "databases/database.db"):
     """
@@ -66,6 +76,10 @@ class User(BaseModel):
     password: str
     now: str
     additional_metadata: str
+
+@app.get("/")
+async def start_page():
+    return RedirectResponse(url="/home")
 
 @app.post("/api/request_signup")
 def login_done(user: User):
