@@ -10,5 +10,5 @@ def console_bar(currentPercentage, barLength):
 
 bar_length = 20
 
-for i in range(0, 101):
+for i in range(0, 101, 2):
     console_bar(currentPercentage=i, barLength=bar_length)
