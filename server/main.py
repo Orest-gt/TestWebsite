@@ -11,6 +11,14 @@ from fastapi.templating import Jinja2Templates
 import os
 
 templates = Jinja2Templates(directory="server/frontend/src/templates")
+templates.TemplateResponse()
+def add_new_page(user_id, username):
+    appcode = f"""
+    @app.get("/home/user_id", response_class=HTMLResponse)
+    def page_{user_id}():
+        return 
+    """
+
 
 load_dotenv()
 key = os.environ.get("KEY")
@@ -69,7 +77,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.mount("/home", StaticFiles(directory="frontend/dist", html=True), name="home")
+app.mount("/login", StaticFiles(directory="frontend/dist", html=True), name="home")
 
 class User(BaseModel):
     username: str
@@ -79,7 +87,7 @@ class User(BaseModel):
 
 @app.get("/")
 async def start_page():
-    return RedirectResponse(url="/home")
+    return RedirectResponse(url="/login")
 
 @app.post("/api/request_signup")
 def login_done(user: User):
